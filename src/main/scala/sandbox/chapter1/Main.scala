@@ -6,7 +6,8 @@ import sandbox.chapter1.introduction.PrintableInstances.{catPrint, intPrint, str
 import sandbox.chapter1.introduction.PrintableSyntax.PrintableOps
 import sandbox.chapter1.introduction.{Cat, PrintableImpl}
 
-object Main extends App {
+//object Main extends App {
+object Main {
   // Intro exercise 1
   PrintableImpl.print("test")
   PrintableImpl.print(3)
