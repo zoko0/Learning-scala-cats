@@ -1,6 +1,108 @@
 [debug] [zinc] IncrementalCompile -----------
 [debug] IncrementalCompile.incrementalCompile
-[debug] previous = Stamps for: 15 products, 7 sources, 3 libraries
+[debug] previous = Stamps for: 23 products, 7 sources, 3 libraries
 [debug] current source = Set(${BASE}/src/main/scala/sandbox/chapter1/introduction/Printable.scala, ${BASE}/src/main/scala/sandbox/chapter1/introduction/Cat.scala, ${BASE}/src/main/scala/sandbox/chapter1/introduction/PrintableInstances.scala, ${BASE}/src/main/scala/sandbox/chapter1/Main.scala, ${BASE}/src/main/scala/sandbox/chapter1/introduction/PrintableSyntax.scala, ${BASE}/src/main/scala/sandbox/chapter2/Main.scala, ${BASE}/src/main/scala/sandbox/chapter1/introduction/PrintableImpl.scala)
-[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())
-[debug] No changes
+[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(${BASE}/src/main/scala/sandbox/chapter2/Main.scala), unmodified = ...),Set(),Set(),API Changes: Set())
+[debug] 
+[debug] Initial source changes:
+[debug] 	removed: Set()
+[debug] 	added: Set()
+[debug] 	modified: Set(${BASE}/src/main/scala/sandbox/chapter2/Main.scala)
+[debug] Invalidated products: Set()
+[debug] External API changes: API Changes: Set()
+[debug] Modified binary dependencies: Set()
+[debug] Initial directly invalidated classes: Set(sandbox.chapter2.Monoid, sandbox.chapter2.Semigroup, sandbox.chapter2.Main)
+[debug] Sources indirectly invalidated by:
+[debug] 	product: Set()
+[debug] 	binary dep: Set()
+[debug] 	external source: Set()
+[debug] All initially invalidated classes: Set(sandbox.chapter2.Monoid, sandbox.chapter2.Semigroup, sandbox.chapter2.Main)
+[debug] All initially invalidated sources:Set(${BASE}/src/main/scala/sandbox/chapter2/Main.scala)
+[debug] Initial set of included nodes: sandbox.chapter2.Monoid, sandbox.chapter2.Semigroup, sandbox.chapter2.Main
+[debug] compilation cycle 1
+[info] compiling 1 Scala source to C:\Projects\cats-sandbox\target\scala-2.13\classes ...
+[debug] Getting org.scala-sbt:compiler-bridge_2.13:1.5.7:compile for Scala 2.13.6
+[debug] [zinc] Running cached compiler 40d879f4 for Scala compiler version 2.13.6
+[debug] [zinc] The Scala compiler is invoked with:
+[debug] 	-encoding
+[debug] 	utf8
+[debug] 	-explaintypes
+[debug] 	-feature
+[debug] 	-language:existentials
+[debug] 	-language:experimental.macros
+[debug] 	-language:higherKinds
+[debug] 	-language:implicitConversions
+[debug] 	-unchecked
+[debug] 	-Xcheckinit
+[debug] 	-Xfatal-warnings
+[debug] 	-Xlint:adapted-args
+[debug] 	-Xlint:constant
+[debug] 	-Xlint:delayedinit-select
+[debug] 	-Xlint:deprecation
+[debug] 	-Xlint:doc-detached
+[debug] 	-Xlint:inaccessible
+[debug] 	-Xlint:infer-any
+[debug] 	-Xlint:missing-interpolator
+[debug] 	-Xlint:nullary-unit
+[debug] 	-Xlint:option-implicit
+[debug] 	-Xlint:package-object-classes
+[debug] 	-Xlint:poly-implicit-overload
+[debug] 	-Xlint:private-shadow
+[debug] 	-Xlint:stars-align
+[debug] 	-Xlint:strict-unsealed-patmat
+[debug] 	-Xlint:type-parameter-shadow
+[debug] 	-Xlint:-byname-implicit
+[debug] 	-Wunused:nowarn
+[debug] 	-Wdead-code
+[debug] 	-Wextra-implicit
+[debug] 	-Wnumeric-widen
+[debug] 	-Wunused:implicits
+[debug] 	-Wunused:explicits
+[debug] 	-Wunused:imports
+[debug] 	-Wunused:locals
+[debug] 	-Wunused:params
+[debug] 	-Wunused:patvars
+[debug] 	-Wunused:privates
+[debug] 	-Wvalue-discard
+[debug] 	-Vimplicits
+[debug] 	-Vtype-diffs
+[debug] 	-Xplugin:C:\Users\barto\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\typelevel\kind-projector_2.13.6\0.13.0\kind-projector_2.13.6-0.13.0.jar
+[debug] 	-bootclasspath
+[debug] 	C:\Users\barto\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-library\2.13.6\scala-library-2.13.6.jar
+[debug] 	-classpath
+[debug] 	C:\Projects\cats-sandbox\target\scala-2.13\classes;C:\Users\barto\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\typelevel\cats-core_2.13\2.6.1\cats-core_2.13-2.6.1.jar;C:\Users\barto\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\typelevel\cats-kernel_2.13\2.6.1\cats-kernel_2.13-2.6.1.jar;C:\Users\barto\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\typelevel\simulacrum-scalafix-annotations_2.13\0.5.4\simulacrum-scalafix-annotations_2.13-0.5.4.jar
+[debug] Invalidating (transitively) by inheritance from sandbox.chapter2.Monoid...
+[debug] Initial set of included nodes: sandbox.chapter2.Monoid
+[debug] Invalidated by transitive inheritance dependency: Set(sandbox.chapter2.Monoid)
+[debug] Change NamesChange(sandbox.chapter2.Monoid,ModifiedNames(changes = UsedName(wait,[Default]), UsedName(ne,[Default]), UsedName(finalize,[Default]), UsedName(##,[Default]), UsedName(apply,[Default]), UsedName(synchronized,[Default]), UsedName(Monoid,[Default]), UsedName(equals,[Default]), UsedName(notifyAll,[Default]), UsedName(==,[Default]), UsedName(combine,[Default]), UsedName(eq,[Default]), UsedName(!=,[Default]), UsedName(isInstanceOf,[Default]), UsedName(getClass,[Default]), UsedName(empty,[Default]), UsedName(clone,[Default]), UsedName(asInstanceOf,[Default]), UsedName(hashCode,[Default]), UsedName(notify,[Default]), UsedName(toString,[Default]))) invalidates 1 classes due to The sandbox.chapter2.Monoid has the following regular definitions changed:
+[debug] 	UsedName(wait,[Default]), UsedName(ne,[Default]), UsedName(finalize,[Default]), UsedName(##,[Default]), UsedName(apply,[Default]), UsedName(synchronized,[Default]), UsedName(Monoid,[Default]), UsedName(equals,[Default]), UsedName(notifyAll,[Default]), UsedName(==,[Default]), UsedName(combine,[Default]), UsedName(eq,[Default]), UsedName(!=,[Default]), UsedName(isInstanceOf,[Default]), UsedName(getClass,[Default]), UsedName(empty,[Default]), UsedName(clone,[Default]), UsedName(asInstanceOf,[Default]), UsedName(hashCode,[Default]), UsedName(notify,[Default]), UsedName(toString,[Default]).
+[debug]   > by transitive inheritance: Set(sandbox.chapter2.Monoid)
+[debug]   > 
+[debug]   > 
+[debug]         
+[debug] Invalidating (transitively) by inheritance from sandbox.chapter2.Semigroup...
+[debug] Initial set of included nodes: sandbox.chapter2.Semigroup
+[debug] Invalidated by transitive inheritance dependency: Set(sandbox.chapter2.Semigroup)
+[debug] Change NamesChange(sandbox.chapter2.Semigroup,ModifiedNames(changes = UsedName(wait,[Default]), UsedName(ne,[Default]), UsedName(finalize,[Default]), UsedName(##,[Default]), UsedName(synchronized,[Default]), UsedName(equals,[Default]), UsedName(notifyAll,[Default]), UsedName(==,[Default]), UsedName(combine,[Default]), UsedName(eq,[Default]), UsedName(!=,[Default]), UsedName(isInstanceOf,[Default]), UsedName(getClass,[Default]), UsedName(clone,[Default]), UsedName(Semigroup,[Default]), UsedName(asInstanceOf,[Default]), UsedName(hashCode,[Default]), UsedName(notify,[Default]), UsedName(toString,[Default]))) invalidates 1 classes due to The sandbox.chapter2.Semigroup has the following regular definitions changed:
+[debug] 	UsedName(wait,[Default]), UsedName(ne,[Default]), UsedName(finalize,[Default]), UsedName(##,[Default]), UsedName(synchronized,[Default]), UsedName(equals,[Default]), UsedName(notifyAll,[Default]), UsedName(==,[Default]), UsedName(combine,[Default]), UsedName(eq,[Default]), UsedName(!=,[Default]), UsedName(isInstanceOf,[Default]), UsedName(getClass,[Default]), UsedName(clone,[Default]), UsedName(Semigroup,[Default]), UsedName(asInstanceOf,[Default]), UsedName(hashCode,[Default]), UsedName(notify,[Default]), UsedName(toString,[Default]).
+[debug]   > by transitive inheritance: Set(sandbox.chapter2.Semigroup)
+[debug]   > 
+[debug]   > 
+[debug]         
+[debug] Invalidating (transitively) by inheritance from sandbox.chapter2.Main...
+[debug] Initial set of included nodes: sandbox.chapter2.Main
+[debug] Invalidated by transitive inheritance dependency: Set(sandbox.chapter2.Main)
+[debug] Change NamesChange(sandbox.chapter2.Main,ModifiedNames(changes = UsedName(booleanXnorMonoid,[Implicit]), UsedName(booleanXorMonoid,[Implicit]), UsedName(finalize,[Default]), UsedName(booleanOrMonoid,[Implicit]), UsedName(booleanAndMonoid,[Implicit]), UsedName(add,[Default]), UsedName(and,[Implicit]), UsedName(setUnionMonoid,[Implicit]))) invalidates 1 classes due to The sandbox.chapter2.Main has the following implicit definitions changed:
+[debug] 	UsedName(booleanXnorMonoid,[Implicit]), UsedName(booleanXorMonoid,[Implicit]), UsedName(booleanOrMonoid,[Implicit]), UsedName(booleanAndMonoid,[Implicit]), UsedName(and,[Implicit]), UsedName(setUnionMonoid,[Implicit]).
+[debug]   > by transitive inheritance: Set(sandbox.chapter2.Main)
+[debug]   > 
+[debug]   > 
+[debug]         
+[debug] New invalidations:
+[debug] Initial set of included nodes: 
+[debug] Previously invalidated, but (transitively) depend on new invalidations:
+[debug] Final step, transitive dependencies:
+[debug] 	Set()
+[debug] No classes were invalidated.
+[debug] Scala compilation took 2.4410895 s
+[info] done compiling
