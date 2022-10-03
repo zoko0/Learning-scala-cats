@@ -5,7 +5,8 @@ import cats.syntax.semigroup._
 import cats.instances.option._
 
 // Monoids and semigroups
-object Main extends App {
+object Main {
+//object Main extends App {
 
   // Monoids must be associative and closed and have identity element
   // associativity: order doesn't matter ((a + b) +c) == (a + (b +c))

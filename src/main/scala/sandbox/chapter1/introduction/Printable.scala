@@ -12,4 +12,8 @@ package sandbox.chapter1.introduction
 
 trait Printable[A] {
   def format(value: A): String
+
+  // CH3 Exercise: Showing off with Contramap
+  def contramap[B](func: B => A): Printable[B] =
+    (value: B) => func(value).toString
 }

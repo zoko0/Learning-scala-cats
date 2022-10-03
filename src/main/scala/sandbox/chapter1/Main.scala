@@ -2,12 +2,13 @@ package sandbox.chapter1
 
 import cats.implicits.{catsSyntaxEq, toShow}
 import cats.{Eq, Show}
+import sandbox.chapter1.introduction.PrintableInstances.stringPrint.format
 import sandbox.chapter1.introduction.PrintableInstances.{catPrint, intPrint, stringPrint}
 import sandbox.chapter1.introduction.PrintableSyntax.PrintableOps
 import sandbox.chapter1.introduction.{Cat, PrintableImpl}
 
-//object Main extends App {
-object Main {
+object Main extends App {
+//object Main {
   // Intro exercise 1
   PrintableImpl.print("test")
   PrintableImpl.print(3)
@@ -21,6 +22,8 @@ object Main {
   println(showInt.show(123))
   val showString = "abc".show
   println(showString)
+
+  println(format("hello"))
 
   // Exercise 2: Cat show
   implicit val catShow: Show[Cat] = Show.show(value => s"${value.name} is a ${value.age} year-old ${value.color} cat.")
