@@ -18,8 +18,34 @@ object Main extends App {
 
   val box = Box(42)
   println(format(box))
+
+  // imap exercise
+  // val codec = Codec(22.0) // Don't know why doesn't compile yet
+}
+trait Codec[A] { self =>
+  def encode(value: A): String
+
+  def decode(value: String): A
+
+  def imap[B](dec: A => B, enc: B => A): Codec[B] = {
+    new Codec[B] {
+      def encode(value: B): String =
+        self.encode(enc(value))
+
+      def decode(value: String): B =
+        dec(self.decode(value))
+    }
+  }
 }
 
+object Codec {
+  implicit val doubleCodec: Codec[Double] = {
+    new Codec[Double] {
+      override def encode(value: Double): String = value.toString
+      override def decode(value: String): Double = value.toDouble
+    }
+  }
+}
 sealed trait Tree[+A]
 
 final case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
