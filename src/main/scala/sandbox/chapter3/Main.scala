@@ -1,12 +1,19 @@
 package sandbox.chapter3
 
-import cats.Functor
+import cats.{Functor, Show}
 import cats.implicits.toFunctorOps
 import sandbox.chapter1.introduction.Printable
 import sandbox.chapter1.introduction.PrintableImpl.format
 import sandbox.chapter1.introduction.PrintableInstances.intPrint
+import cats.syntax.contravariant._ // for contramap
 
-object Main extends App {
+object Main {
+//object Main extends App {
+
+  // Functors represent sequencing behaviors. Types of functors:
+  // covariant - map
+  // contravariant - contramap
+  // invaraint - imap (bidirectional)
 
   // Exercise: Branching out with Functors
   val tree = Tree.leaf(100)
@@ -21,6 +28,14 @@ object Main extends App {
 
   // imap exercise
   // val codec = Codec(22.0) // Don't know why doesn't compile yet
+
+  // contravariant
+  val showString = Show[String]
+  println(showString
+    .contramap[Symbol](sym => s"'${sym.name}") // contramap can be intepreted as (pre-map). I don't really find use for it in real world example
+    .show(Symbol("dave")))
+
+
 }
 trait Codec[A] { self =>
   def encode(value: A): String
