@@ -1,6 +1,7 @@
 package sandbox.chapter4
 
-import cats.{Id, Monad}
+import cats.implicits.{catsSyntaxApplicativeErrorId, catsSyntaxApplicativeId, catsSyntaxEitherId}
+import cats.{Id, Monad, MonadError}
 import cats.instances.list._ // for Monad
 
 object Main extends App {
@@ -18,6 +19,27 @@ object Main extends App {
   val list2 = Monad[List].
     flatMap(List(1, 2, 3)) { a => List(a, a * 10) }
   println(list2)
+
+  // Either
+  val a = 3.asRight[String]
+  println(a)
+  val b = "123".asLeft[Int]
+  for {
+    x <- a
+    y <- b
+  } yield x + y
+
+  // Exercise
+  // Either can be used for:
+  // Error recovery - retries strategies
+  // Error reporting - logging
+  // ..
+
+  // Another exercise
+  def validateAdult[F[_]](age: Int)(implicit me: MonadError[F, Throwable]): F[Int] =
+    if (age >= 18) age.pure[F]
+    else new IllegalArgumentException("Age must be greater than or equal to 18").raiseError[F, Int]
+
 }
 
 trait AMonad[F[_]] {
