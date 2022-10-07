@@ -1,7 +1,7 @@
 package sandbox.chapter4
 
 import cats.implicits.{catsSyntaxApplicativeErrorId, catsSyntaxApplicativeId, catsSyntaxEitherId}
-import cats.{Id, Monad, MonadError}
+import cats.{Eval, Id, Monad, MonadError}
 import cats.instances.list._ // for Monad
 
 object Main extends App {
@@ -39,6 +39,42 @@ object Main extends App {
   def validateAdult[F[_]](age: Int)(implicit me: MonadError[F, Throwable]): F[Int] =
     if (age >= 18) age.pure[F]
     else new IllegalArgumentException("Age must be greater than or equal to 18").raiseError[F, Int]
+
+
+  // Eval monad
+  // Three different combinations of eval mode:
+  // call-by-value - val -> eager and memoized -> Eval.now
+  // call-by-name - def -> lazy and not memoized -> Eval.always
+  // call-by-need - lazy val -> lazy and memoized -> Eval.later
+  val ans = for {
+    a <- Eval.later {
+      println("Calculating A"); 40
+    }
+    b <- Eval.always {
+      println("Calculating B"); 2
+    }
+  } yield {
+    println("Adding A and B")
+    a + b
+  }
+  println(ans.value)
+
+  // Exercise
+  def foldRightEval[A, B](as: List[A], acc: Eval[B])
+                         (fn: (A, Eval[B]) => Eval[B]): Eval[B] =
+    as match {
+      case head :: tail =>
+        Eval.defer(fn(head, foldRightEval(tail, acc)(fn)))
+      case Nil =>
+        acc
+    }
+
+  def foldRight[A, B](as: List[A], acc: B)(fn: (A, B) => B): B =
+    foldRightEval(as, Eval.now(acc)) { (a, b) =>
+      b.map(fn(a, _))
+    }.value
+
+  println(foldRight((1 to 100000).toList, 0L)(_ + _))
 
 }
 
