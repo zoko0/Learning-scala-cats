@@ -1,8 +1,13 @@
 package sandbox.chapter4
 
-import cats.implicits.{catsSyntaxApplicativeErrorId, catsSyntaxApplicativeId, catsSyntaxEitherId}
+import cats.data.Writer
+import cats.implicits.{catsSyntaxApplicativeErrorId, catsSyntaxApplicativeId, catsSyntaxEitherId, catsSyntaxWriterId}
+import cats.instances.list._
 import cats.{Eval, Id, Monad, MonadError}
-import cats.instances.list._ // for Monad
+
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration.DurationInt
+import scala.concurrent.{Await, Future} // for Monad
 
 object Main extends App {
 
@@ -48,10 +53,12 @@ object Main extends App {
   // call-by-need - lazy val -> lazy and memoized -> Eval.later
   val ans = for {
     a <- Eval.later {
-      println("Calculating A"); 40
+      println("Calculating A");
+      40
     }
     b <- Eval.always {
-      println("Calculating B"); 2
+      println("Calculating B");
+      2
     }
   } yield {
     println("Adding A and B")
@@ -76,7 +83,30 @@ object Main extends App {
 
   println(foldRight((1 to 100000).toList, 0L)(_ + _))
 
+  // Exercise: Show your Working
+  def slowly[A](body: => A) =
+    try body finally Thread.sleep(100)
+
+
+  type Logged[A] = Writer[Vector[String], A]
+
+  def factorial(n: Int): Logged[Int] =
+    for {
+      ans <- if(n == 0) {
+        1.pure[Logged]
+      } else {
+        slowly(factorial(n - 1).map(_ * n))
+      }
+      _ <- Vector(s"fact $n $ans").tell
+    } yield ans
+
+  Await.result(Future.sequence(Vector(
+    Future(factorial(5)),
+    Future(factorial(5))
+  )).map(_.map(_.written)), 5.seconds)
+
 }
+
 
 trait AMonad[F[_]] {
   def pure[A](a: A): F[A]
