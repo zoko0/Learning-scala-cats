@@ -5,10 +5,13 @@ import cats.data.Reader
 import cats.implicits.{catsSyntaxApplicativeErrorId, catsSyntaxApplicativeId, catsSyntaxEitherId, catsSyntaxWriterId}
 import cats.instances.list._
 import cats.{Eval, Id, Monad, MonadError}
+import sandbox.chapter3.Tree.{branch, leaf}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.DurationInt
 import scala.concurrent.{Await, Future} // for Monad
+import cats.syntax.functor._ // for map
+import cats.syntax.flatMap._ // for flatMap
 
 object Main extends App {
 
@@ -185,6 +188,14 @@ object Main extends App {
 
   evalInput("1 2 + 3 4 + *")
 
+  // Exercise: Branching out Further with Monads
+  branch(leaf(100), leaf(200)).
+    flatMap(x => branch(leaf(x - 1), leaf(x + 1)))
+  for {
+    a <- branch(leaf(100), leaf(200))
+    b <- branch(leaf(a - 10), leaf(a + 10))
+    c <- branch(leaf(b - 1), leaf(b + 1))
+  } yield c
 }
 
 final case class Db(usernames: Map[Int, String], passwords: Map[String, String])

@@ -1,6 +1,6 @@
 package sandbox.chapter3
 
-import cats.{Functor, Show}
+import cats.{Functor, Monad, Show}
 import cats.implicits.toFunctorOps
 import sandbox.chapter1.introduction.Printable
 import sandbox.chapter1.introduction.PrintableImpl.format
@@ -82,6 +82,22 @@ object Tree {
           case Branch(left, right) => Branch(map(left)(f), map(right)(f))
         }
     }
+
+  implicit val treeMonad: Monad[Tree] = new Monad[Tree] {
+    override def pure[A](x: A): Tree[A] = Leaf(x)
+
+    override def flatMap[A, B](tree: Tree[A])(f: A => Tree[B]): Tree[B] =
+      tree match {
+        case Leaf(value) => f(value)
+        case Branch(left, right) => Branch(flatMap(left)(f), flatMap(right)(f))
+      }
+
+    override def tailRecM[A, B](a: A)(f: A => Tree[Either[A, B]]): Tree[B] =
+      flatMap(f(a)) {
+        case Left(value) => tailRecM(value)(f)
+        case Right(value) => Leaf(value)
+      }
+  }
 }
 
 final case class Box[A](value: A)
