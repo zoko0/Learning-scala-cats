@@ -139,6 +139,52 @@ object Main extends App {
   val db = Db(users, passwords)
   checkLogin(1, "zerocool").run(db)
   checkLogin(4, "davinci").run(db)
+
+  // Exercise: Post-Order Calculator
+
+  import cats.data.State
+
+  type CalcState[A] = State[List[Int], A]
+
+  def operand(num: Int): CalcState[Int] =
+    State[List[Int], Int] { stack =>
+      (num :: stack, num)
+    }
+
+  def operator(func: (Int, Int) => Int): CalcState[Int] =
+    State[List[Int], Int] {
+      case b :: a :: tail =>
+        val ans = func(a, b)
+        (ans :: tail, ans)
+      case _ =>
+        sys.error("Fail!")
+    }
+
+  def evalOne(sym: String): CalcState[Int] =
+    sym match {
+      case "+" => operator(_ + _)
+      case "-" => operator(_ - _)
+      case "*" => operator(_ * _)
+      case "/" => operator(_ / _)
+      case num => operand(num.toInt)
+    }
+
+  val program = for {
+    _ <- evalOne("1")
+    _ <- evalOne("2")
+    ans <- evalOne("+")
+  } yield ans
+
+  program.runA(Nil).value
+
+  def evalAll(input: List[String]): CalcState[Int] =
+    input.foldLeft(0.pure[CalcState]) { (a, b) => a.flatMap(_ => a.flatMap(_ => evalOne(b))) }
+
+  def evalInput(input: String): Int =
+    evalAll(input.split(" ").toList).runA(Nil).value
+
+  evalInput("1 2 + 3 4 + *")
+
 }
 
 final case class Db(usernames: Map[Int, String], passwords: Map[String, String])
