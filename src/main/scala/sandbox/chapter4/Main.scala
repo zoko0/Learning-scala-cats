@@ -13,7 +13,8 @@ import scala.concurrent.{Await, Future} // for Monad
 import cats.syntax.functor._ // for map
 import cats.syntax.flatMap._ // for flatMap
 
-object Main extends App {
+object Main {
+//object Main extends App {
 
   // Monads
   // informally monad is anything with a constructor and flapMap method
@@ -196,6 +197,14 @@ object Main extends App {
     b <- branch(leaf(a - 10), leaf(a + 10))
     c <- branch(leaf(b - 1), leaf(b + 1))
   } yield c
+
+  /*
+  Summary for monads:
+  Cats library defined monads: Option, Either, List, Future.
+  Cats library custom data types: Id, Reader, Writer and State
+
+
+   */
 }
 
 final case class Db(usernames: Map[Int, String], passwords: Map[String, String])
