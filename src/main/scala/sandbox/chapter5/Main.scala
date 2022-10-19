@@ -7,7 +7,8 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.DurationInt
 import scala.concurrent.{Await, Future}
 
-object Main extends App {
+//object Main extends App {
+object Main {
   // Exercise: Monads: Transform and Roll Out
   type Response[A] = EitherT[Future, String, A]
 
